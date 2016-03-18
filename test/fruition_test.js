@@ -4,7 +4,7 @@ var functions = require('../Fruition');
 describe("JSONdeal", function(){
   it("should return the SELLERS and PRICES of the PRODUCTS",function(){
     var result = functions.JSONdeal();
-    assert.deepEqual(result,{ 
+    assert.deepEqual(result,{
       "woolingsworth": {
         "apples": 4,
         "bananas": 3,
@@ -153,6 +153,6 @@ describe("cheapestFruit",function(){
         "apples": 4
 }
       });
-      assert.equal(result,"");
+      assert.equal(result,"bananas");
   });
 });

@@ -47,38 +47,64 @@ exports.cOrangeSeller = function(JSONdeals) {
   }
 };
 
-exports.AscApples = function(JSONdeals){
+exports.AscApples = function(JSONdeals) {
   var appleSellers = [];
-  for(var shop in JSONdeals){
-    if(JSONdeals[shop].hasOwnProperty("apples")){
+  for (var shop in JSONdeals) {
+    if (JSONdeals[shop].hasOwnProperty("apples")) {
       appleSellers.push({
         'shop': shop,
         'price': JSONdeals[shop].apples
       });
     }
   }
-  // console.log(appleSellers);
-  var asc = appleSellers.sort(function(a, b){
-     return a.price - b.price;
-   });
-   return asc;
+  var asc = appleSellers.sort(function(a, b) {
+    return a.price - b.price;
+  });
+  return asc;
 };
-exports.DscApples = function(JSONdeals){
+exports.DscApples = function(JSONdeals) {
   var appleSellers = [];
-  for(var shop in JSONdeals){
-    if(JSONdeals[shop].hasOwnProperty("apples")){
+  for (var shop in JSONdeals) {
+    if (JSONdeals[shop].hasOwnProperty("apples")) {
       appleSellers.push({
         'shop': shop,
         'price': JSONdeals[shop].apples
       });
     }
   }
-  // console.log(appleSellers);
-  var dsc = appleSellers.sort(function(a, b){
-     return b.price - a.price;
-   });
-   return asc;
-};
-exports.cheapestFruit = function(){
 
+  var dsc = appleSellers.sort(function(a, b) {
+    return b.price - a.price;
+  });
+  return dsc;
+};
+exports.cheapestFruit = function(JSONdeals) {
+  var fruits = [];
+  var cheapest_price = 0;
+  var cheapest = "";
+  for (var shops in JSONdeals) {
+    for (var fruit in JSONdeals[shops]) {
+      if (fruits.indexOf(fruit) < 0) {
+        fruits.push(fruit);
+      }
+
+    }
+  }
+  for (x = 0; x < fruits.length; x++) {
+    var total = 0;
+    var count = 0;
+    for (var Shops in JSONdeals) {
+      if (JSONdeals[Shops].hasOwnProperty(fruits[x])) {
+
+        total += JSONdeals[Shops][fruits[x]];
+        count++;
+      }
+    }
+    var average_price = total / count;
+    if ((average_price < cheapest_price) || cheapest_price === 0) {
+      cheapest_price = average_price;
+      cheapest = fruits[x];
+    }
+  }
+  return cheapest;
 };
